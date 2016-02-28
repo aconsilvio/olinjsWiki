@@ -3,6 +3,7 @@ var mongoose = require('mongoose');
 var pageSchema = mongoose.Schema({ 
 	header: String, 
 	content: String
-}); 
+}, {'collection' : 'wiki'}); 
 
-module.exports = mongoose.model('wiki',  pageSchema); 
+var wiki = mongoose.model('wiki',  pageSchema);
+module.exports = wiki;

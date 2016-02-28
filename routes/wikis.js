@@ -4,34 +4,10 @@ var express = require('express');
 var router = express.Router(); 
 var mongoose = require('mongoose'); 
 
-var wikiModel = require('../models/wikiModel');
-
-var Wiki = mongoose.model('wiki', wikiModel.pageSchema);
+var path = require('path');
+var Wiki = require(path.join(__dirname,'../models/wikiModel'));
 
 wiki = {}; 
-
-
-// var getIngredients = function(callback){ 
-// 	//Input: callback function to call next after this function executes 
-// 	//Output: returns a call to the callback function with all of the ingredients found in mongoose 
-// 	ingredients.find({}, function(err, allIngredients){
-// 		if (err){ 
-// 			console.log(err); 
-// 		}
-// 		return callback(allIngredients); 
-// 	}); 
-// }
-
-// var addIngredient = function(request, response){
-// 	//Input: request, response object
-// 	//Output: --
-
-// 	//makes a new ingredient with the ingredient schema and saves it to the database 
-// 	var newIngredient = new ingredients({name: request.body.name, price: request.body.price, outOfStock: request.body.outOfStock}); 
-// 	newIngredient.save(function(err){ 
-// 		console.log("there was a problem saving the new ingredient", err); 
-// 	})
-// }
 
 wiki.home = function(req, res){ 
 	//annabel
@@ -42,6 +18,7 @@ wiki.home = function(req, res){
 			res.send(err);
 		}
 		res.json(wikiList);
+		console.log(wikiList); 
 	})
 	
 }
