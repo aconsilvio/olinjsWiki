@@ -23,6 +23,10 @@ function mainController($scope, $http) {
   //     });
   // };
 
+  $scope.newWiki = function(){ 
+    $scope.wiki.header = {}; 
+    $scope.wiki.content = {}; 
+  }
 }
 
 //http://jsfiddle.net/timriley/GVCP2/

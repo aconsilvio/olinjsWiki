@@ -67,6 +67,8 @@ wiki.createNewGET = function(req, res){
 	//should also load sidebar of titles
 	//res.json
 
+
+
 };
 
 wiki.saveNewPOST = function(req, res){
@@ -74,6 +76,13 @@ wiki.saveNewPOST = function(req, res){
 	//save a new page to the database
 	//should redirect to new post page
 
+	w = new Wiki({header: req.body.header, content: req.body.content}); 
+	w.save(function(err){ 
+		if(err){ 
+			console.log("there has been an error saving new wiki", err); 
+		}
+		res.redirect(200, '/api/' + w.header); 
+	})
 };
 
 
