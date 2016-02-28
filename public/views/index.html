@@ -29,7 +29,8 @@
 <!-- SET THE CONTROLLER AND GET ALL toDoS -->
 <body ng-controller="mainController">
     <div class="container">
-        <button id = "addNew" ng-click = "newWiki()"> New Wiki </button>
+        <h1> This is a header </h1>
+        <button id = "addNew" ng-click = "show = true"> New Wiki </button>
         <div id="wiki-list" class="row">
                 <!-- LOOP OVER THE items IN $scope.wiki -->
             <div ng-repeat="item in wiki">
@@ -40,6 +41,16 @@
         <div id = "wiki-content">
             <h2>{{wiki.header}}</h2>
             <p>{{wiki.content}}</p>
+        </div>
+
+        <div id = "new wiki"> 
+            <div> 
+                <form class ="newWikiContent"> 
+                    Title: <input type="text" ng-model="wiki.header" /><br />
+                    Content: <input type="text" ng-model="wiki.content" /><br />
+                    <input type="button" ng-click="newWiki(wiki)"> Save </input>
+                </form>
+            </div>
         </div>
     </div>
 
