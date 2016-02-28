@@ -27,10 +27,12 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.get('/api/', function(req, res){
+        res.sendfile('./public/views/index.html');
+    })
 app.get('/api/', wiki.home);
 app.get('/api/:title', wiki.loadPageGET);
-app.post('/api/:title', wiki.savePOST);
-app.get('/api/createNew', wiki.createNewGET);
+app.post('/api/:title', wiki.updateWikiPOST);
 app.post('/api/createNew', wiki.saveNewPOST);
 
     var PORT = process.env.PORT || 2000;

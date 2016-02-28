@@ -41,7 +41,7 @@ wiki.home = function(req, res){
 		if(err){
 			res.send(err);
 		}
-		res.json(wikiList)
+		res.json(wikiList);
 	})
 	
 }
@@ -51,32 +51,37 @@ wiki.loadPageGET = function(req, res){
 	//load page of a specific title
 	//should also load sidebar of titles
 	//res.json
+	var header = req.params.title;
+	Wiki.findOne({header:header}, function(err, wikiContent){
+		if(err){
+			res.send(err);
+		}
+		console.log(wikiContent);
+		res.json(wikiContent);
+	})
 
 };
 
-wiki.savePOST = function(req, res){
+wiki.updateWikiPOST = function(req, res){
 	//zarin
 	//edit and save a page with a specific title
+	var newHeader = req.body.header;
+	var newContent = req.body.content;
+	var id = req.body.id;
+	Wiki.update({_id: id}, {new:true}, function(err, updatedObj){
+		console.log(updatedObj);
+		res.json(updatedObj);			
+	})
 	
 };
 
-
-wiki.createNewGET = function(req, res){
-	//casey
-	//load a page with a form on it
-	//should also load sidebar of titles
-	//res.json
-
-
-
-};
 
 wiki.saveNewPOST = function(req, res){
 	//casey
 	//save a new page to the database
 	//should redirect to new post page
 
-	w = new Wiki({header: req.body.header, content: req.body.content}); 
+	var w = new Wiki({header: req.body.header, content: req.body.content}); 
 	w.save(function(err){ 
 		if(err){ 
 			console.log("there has been an error saving new wiki", err); 
