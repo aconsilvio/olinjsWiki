@@ -1,0 +1,50 @@
+<!-- index.html -->
+<!doctype html>
+
+<!-- ASSIGN OUR ANGULAR MODULE -->
+<html ng-app="wikiApp">
+<head>
+    <!-- META -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Optimize mobile viewport -->
+
+    <title>Node/Angular toDo App</title>
+
+    <!-- SCROLLS -->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"><!-- load bootstrap -->
+    <style>
+        html                    { overflow-y:scroll; }
+        body                    { padding-top:50px; }
+        #toDo-list              { margin-bottom:30px; }
+        .pending-delete         { text-decoration: line-through; }
+        .strike                 { text-decoration: line-through;}
+    </style>
+
+    <!-- SPELLS -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script><!-- load jquery -->
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script><!-- load angular -->
+    <script src="core.js"></script>
+
+</head>
+<!-- SET THE CONTROLLER AND GET ALL toDoS -->
+<body ng-controller="mainController">
+    <div class="container">
+
+        <!-- HEADER AND toDo COUNT -->
+
+        <!-- toDo LIST -->
+        <div id="wiki-list" class="row">
+                <!-- LOOP OVER THE items IN $scope.wiki -->
+            <div ng-repeat="item in wiki">
+              {{item.header}}                
+            </div>
+        </div>
+
+        <div id = "wiki-content">
+            <h2>{{wiki.header}}</h2>
+            <p>{{wiki.content}}</p>
+        </div>
+    </div>
+
+</body>
+</html>

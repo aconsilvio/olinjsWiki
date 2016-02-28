@@ -37,13 +37,20 @@ wiki.home = function(req, res){
 	//annabel
 	//load homepage with list of titles in database
 	//res.send
-	res.send("I AM WORKING"); 
+	Wiki.find({}, function(err, wikiList){
+		if(err){
+			res.send(err);
+		}
+		res.json(wikiList)
+	})
+	
 }
 
 wiki.loadPageGET = function(req, res){
 	//zarin
 	//load page of a specific title
-	//res.send
+	//should also load sidebar of titles
+	//res.json
 
 };
 
@@ -57,13 +64,15 @@ wiki.savePOST = function(req, res){
 wiki.createNewGET = function(req, res){
 	//casey
 	//load a page with a form on it
-	//res.send
+	//should also load sidebar of titles
+	//res.json
 
 };
 
 wiki.saveNewPOST = function(req, res){
 	//casey
 	//save a new page to the database
+	//should redirect to new post page
 
 };
 
