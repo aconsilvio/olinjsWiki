@@ -1,7 +1,7 @@
 var wikiApp = angular.module('wikiApp', []);
 
 function mainController($scope, $http) {
-  // $scope.formData = {};
+  $scope.newWiki = {};
   $scope.show = false; 
 
   $http.get('api/home')
@@ -25,13 +25,17 @@ function mainController($scope, $http) {
       });
   };
 
-  $scope.newWiki = function(wiki){ 
-    $http.post('/api/createNew', wiki)
-      .sucess(function(stuff){ 
-        console.log("stuff", stuff); 
+  $scope.newWiki = function(){ 
+    console.log("are you in here (in new wiki)??")
+    $scope.show = false; 
+    console.log("about to post")
+    $http.post('/api/createNew', {header: $scope.newWiki.header, content: $scope.newWiki.content})
+      .success(function(data){ 
+        $scope.newWiki = {}; 
+        console.log("Success", data)
       })
-      .error(function(err){ 
-        console.log("There has been an error making a new wiki. problem thrown in front end", err); 
+      .error(function(data){ 
+        console.log("Failure", data)
       })
 
   }

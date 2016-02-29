@@ -42,12 +42,12 @@
             
         </div>
 
-        <div id = "new wiki"> 
+        <div id = "new wiki" ng-show = "show"> 
             <div> 
                 <form class ="newWikiContent"> 
-                    Title: <input type="text" ng-model="wiki.header" /><br />
-                    Content: <input type="text" ng-model="wiki.content" /><br />
-                    <input type="button" ng-click="newWiki(wiki)"> Save </input>
+                    Title: <input type="text" ng-model="newWiki.header" /><br />
+                    Content: <input type="text" ng-model="newWiki.content" /><br />
+                    <button ng-click="newWiki()"> Save </button>
                 </form>
             </div>
         </div>

@@ -9,13 +9,9 @@ var Wiki = require(path.join(__dirname,'../models/wikiModel'));
 
 wiki = {}; 
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 6ded7212f5d32426d502be4e1f361b0ccb8df5fa
 wiki.home = function(req, res){ 
 	//load homepage with list of titles in database
-	
+	console.log("I am in home")
 	Wiki.find({}, function(err, wikiList){
 		if(err){
 			res.send(err);
@@ -24,13 +20,13 @@ wiki.home = function(req, res){
 		console.log(wikiList); 
 	})
 	
-}
+};
 
 wiki.loadPageGET = function(req, res){
 	
 	//load page of a specific title
 	//should also load sidebar of titles
-	
+	console.log("I am in loadPage GET")
 	var header = req.params.title;
 	Wiki.findOne({header:header}, function(err, wikiContent){
 		if(err){
@@ -43,7 +39,7 @@ wiki.loadPageGET = function(req, res){
 };
 
 wiki.updateWikiPOST = function(req, res){
-	
+	console.log('WHAT IS THIS SHiT?')
 	//edit and save a page with a specific title
 	var newHeader = req.body.header;
 	var newContent = req.body.content;
@@ -55,20 +51,32 @@ wiki.updateWikiPOST = function(req, res){
 	
 };
 
-
-wiki.saveNewPOST = function(req, res){
+wiki.saveNewWikiPOST  = function(req, res){
 	
 	//save a new page to the database
 	//should redirect to new post page
-
+	console.log('I AM IN HERE');
+	console.log(req); 
 	var w = new Wiki({header: req.body.header, content: req.body.content}); 
 	w.save(function(err){ 
 		if(err){ 
 			console.log("there has been an error saving new wiki", err); 
 		}
-		res.redirect(200, '/api/' + w.header); 
+		console.log("Saved new page sucessfully.")
+		//DO WE WANT TO REDIRECT? 
+		// res.redirect(200, '/api/' + w.header); 
+	});
+
+	Wiki.find({}, function(err, allWikis){
+		//DO WE WANT TO SEND JSON BACK? 
+		res.json(allWikis); 
 	})
-};
+}
+
+wiki.catchAnything = function(req, res){ 
+
+	console.log("Caught something")
+}
 
 
 module.exports = wiki;
