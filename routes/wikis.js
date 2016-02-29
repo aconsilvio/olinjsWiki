@@ -45,7 +45,9 @@ wiki.updateWikiPOST = function(req, res){
 	// console.log(req.body)
 	Wiki.update({header:oldHeader}, {$set: {header:newHeader, content: newContent}}, function(err, record){
 			Wiki.findOne({header:newHeader}, function(err, updatedObj){
-				res.json(updatedObj)
+				Wiki.find({}, function(err, listAll){
+					res.json({mainWiki:updatedObj, all:listAll})
+				})
 			})
 	})
 	// Wiki.update({_id: id}, {new:true}, function(err, updatedObj){
@@ -74,7 +76,7 @@ wiki.saveNewWikiPOST  = function(req, res){
 
 	Wiki.find({}, function(err, allWikis){
 		//DO WE WANT TO SEND JSON BACK? 
-		res.json(allWikis); 
+		res.json({all:allWikis, newWiki: w}); 
 	})
 }
 

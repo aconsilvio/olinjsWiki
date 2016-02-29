@@ -45,7 +45,8 @@ function mainController($scope, $http) {
     console.log("about to post")
     $http.post('/api/createNew', {header: $scope.newWiki.header, content: $scope.newWiki.content})
       .success(function(data){ 
-        $scope.newWiki = data;
+        $scope.newWiki = data.newWiki;
+        $scope.wiki = data.all;
         console.log("Success", data)
       })
       .error(function(data){ 
@@ -73,6 +74,7 @@ function mainController($scope, $http) {
 
         $http.post('/api/header/' + header, {header: $scope.mainWiki.header, content:$scope.mainWiki.content})
           .success(function(data){
+            $scope.wiki = data.all;
             console.log(data)
             console.log('saved correctly')
 
@@ -83,49 +85,3 @@ function mainController($scope, $http) {
     };
 
 }
-
-// function filterController($scope, $http){
-//     $scope.mainWiki = $http.get('api/' + header)
-//     .success(function(data){
-//       $scope.mainWiki = data;
-//       return $scope.mainWiki
-//     })
-//     .error(function(data){
-//       console.log('Error:' + data);
-//     });
-
-//     $scope.header = $scope.mainWiki.header;
-//     $scope.content = $scope.mainWiki.content;
-//     $scope.editorEnabled = false;
-      
-//     $scope.enableEditor = function() {
-//         $scope.editorEnabled = true;
-//         $scope.editableHeader = $scope.wiki.header;
-//         $scope.editableContent = $scope.wiki.content;
-//     };
-      
-//     $scope.disableEditor = function() {
-//         $scope.editorEnabled = false;
-//     };
-      
-//     $scope.save = function(header) {
-//         $scope.wiki.content = $scope.editableContent;
-//         $scope.wiki.header = $scope.editableHeader;
-//         $scope.disableEditor();
-//         $http.post('/api/' + header, {content:$scope.wiki.content})
-//           .success(function(data){
-//             console.log('saved correctly')
-
-//           })
-//           .error(function(data){
-//           console.log('Error:' + data);
-//         });
-//     };
-
-// }
-//http://jsfiddle.net/timriley/GVCP2/
-
-    $("#menu-toggle").click(function(e) {
-        e.preventDefault();
-        $("#wrapper").toggleClass("toggled");
-    });
