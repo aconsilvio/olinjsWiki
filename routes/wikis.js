@@ -5,7 +5,6 @@ var router = express.Router();
 var mongoose = require('mongoose'); 
 
 var wikiModel = require('../models/wikiModel');
-
 var Wiki = mongoose.model('wiki', wikiModel.pageSchema);
 
 wiki = {}; 
@@ -35,14 +34,16 @@ wiki.loadPageGET = function(req, res){
 		}
 		console.log(wikiContent);
 		res.json(wikiContent);
-	})
+	});
+
+
 
 };
 
 wiki.updateWikiPOST = function(req, res){
 	
 	//edit and save a page with a specific title
-	var newHeader = req.body.header;
+	var newHeader = req.body.header;a
 	var newContent = req.body.content;
 	var id = req.body.id;
 	Wiki.update({_id: id}, {new:true}, function(err, updatedObj){
