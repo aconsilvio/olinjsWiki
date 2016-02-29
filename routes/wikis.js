@@ -38,7 +38,7 @@ wiki.loadPageGET = function(req, res){
 };
 
 wiki.updateWikiPOST = function(req, res){
-	console.log('WHAT IS THIS SHiT?')
+	console.log('update wiki')
 	var oldHeader = req.params.title;
 	var newHeader = req.body.header;
 	var newContent = req.body.content;
@@ -59,13 +59,14 @@ wiki.saveNewWikiPOST  = function(req, res){
 	
 	//save a new page to the database
 	//should redirect to new post page
-	console.log('I AM IN HERE');
+	console.log('save wiki');
 	console.log(req); 
 	var w = new Wiki({header: req.body.header, content: req.body.content}); 
 	w.save(function(err){ 
 		if(err){ 
 			console.log("there has been an error saving new wiki", err); 
 		}
+		console.log(w, 'w');
 		console.log("Saved new page sucessfully.")
 		//DO WE WANT TO REDIRECT? 
 		// res.redirect(200, '/api/' + w.header); 

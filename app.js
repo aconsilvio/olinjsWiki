@@ -17,7 +17,6 @@ var app = express();
     var morgan = require('morgan');             // log requests to the console (express4)
     var bodyParser = require('body-parser');    // pull information from HTML POST (express4)
     var methodOverride = require('method-override'); // simulate DELETE and PUT (express4)
-    var wiki = require('./routes/wikis');
     var logger = require('morgan');
     var cookieParser = require('cookie-parser');
     var bodyParser = require('body-parser');
@@ -41,8 +40,8 @@ app.get('/', function(req, res){
     res.sendfile('public/views/index.html');
 });
 app.get('/api/home', wiki.home);
-app.get('/api/:title', wiki.loadPageGET);
-app.post('/api/:title', wiki.updateWikiPOST);
+app.get('/api/header/:title', wiki.loadPageGET);
+app.post('/api/header/:title', wiki.updateWikiPOST);
 app.post('/api/createNew', wiki.saveNewWikiPOST);
 app.get('*', wiki.catchAnything);
 

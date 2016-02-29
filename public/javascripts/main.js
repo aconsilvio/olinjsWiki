@@ -1,7 +1,6 @@
 var wikiApp = angular.module('wikiApp', []);
 
 function mainController($scope, $http) {
-  $scope.newWiki = {};
   $scope.show = false; 
 
   $http.get('api/home')
@@ -27,7 +26,7 @@ function mainController($scope, $http) {
 
   $scope.selectWiki = function(header){
     console.log('in selectWiki')
-    $http.get('api/'+header)
+    $http.get('api/header/'+header)
       .success(function(data){
         $scope.mainWiki = data;
         $scope.header = $scope.mainWiki.header;
@@ -46,7 +45,7 @@ function mainController($scope, $http) {
     console.log("about to post")
     $http.post('/api/createNew', {header: $scope.newWiki.header, content: $scope.newWiki.content})
       .success(function(data){ 
-        $scope.newWiki = {}; 
+        $scope.newWiki = data;
         console.log("Success", data)
       })
       .error(function(data){ 
@@ -72,7 +71,7 @@ function mainController($scope, $http) {
         console.log($scope.mainWiki.content, 'new content')
         console.log($scope.mainWiki.header, 'new header')
 
-        $http.post('/api/' + header, {header: $scope.mainWiki.header, content:$scope.mainWiki.content})
+        $http.post('/api/header/' + header, {header: $scope.mainWiki.header, content:$scope.mainWiki.content})
           .success(function(data){
             console.log(data)
             console.log('saved correctly')
