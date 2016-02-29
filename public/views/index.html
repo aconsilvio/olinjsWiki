@@ -31,17 +31,25 @@
         <div id="wiki-list" class="row">
                 <!--SIDE BAR-->
             <div ng-repeat="item in wiki">
-              {{item.header}}
+              <a ng-click = "selectWiki(item.header)">{{item.header}}</a>
             </div>
         </div>
                 <!-- MAIN PAGE STUFF -->
         <div id = "wiki-content" >
-
-            <h2>{{wiki.header}}</h2>
-            <p>{{wiki.content}}</p>
-            
+            <div ng-hide="editorEnabled">
+                <h2>{{mainWiki.header}}</h2>
+                <p>{{mainWiki.content}}</p>
+                <button a href="#" ng-click="enableEditor()">Edit</a>
+            </div>
+            <div ng-show="editorEnabled">
+                <input ng-model="editableHeader" ng-show="editorEnabled">
+                <input ng-model="editableContent" ng-show="editorEnabled">
+                    <button href="#" ng-click="save(mainWiki.header)">Save</a>
+                          or
+                    <button href="#" ng-click="disableEditor()">Cancel</a>.
+            </div>
         </div>
-
+        <!-- New form stuff -->
         <div id = "new wiki" ng-show = "show"> 
             <div> 
                 <form class ="newWikiContent"> 

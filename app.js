@@ -42,7 +42,7 @@ app.get('/', function(req, res){
 });
 app.get('/api/home', wiki.home);
 app.get('/api/:title', wiki.loadPageGET);
-// app.post('/api/:title', wiki.updateWikiPOST);
+app.post('/api/:title', wiki.updateWikiPOST);
 app.post('/api/createNew', wiki.saveNewWikiPOST);
 app.get('*', wiki.catchAnything);
 

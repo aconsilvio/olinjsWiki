@@ -26,13 +26,12 @@ wiki.loadPageGET = function(req, res){
 	
 	//load page of a specific title
 	//should also load sidebar of titles
-	console.log("I am in loadPage GET")
+	console.log("I am in loadPage get")
 	var header = req.params.title;
 	Wiki.findOne({header:header}, function(err, wikiContent){
 		if(err){
 			res.send(err);
 		}
-		console.log(wikiContent);
 		res.json(wikiContent);
 	})
 
@@ -40,14 +39,19 @@ wiki.loadPageGET = function(req, res){
 
 wiki.updateWikiPOST = function(req, res){
 	console.log('WHAT IS THIS SHiT?')
-	//edit and save a page with a specific title
+	var oldHeader = req.params.title;
 	var newHeader = req.body.header;
 	var newContent = req.body.content;
-	var id = req.body.id;
-	Wiki.update({_id: id}, {new:true}, function(err, updatedObj){
-		console.log(updatedObj);
-		res.json(updatedObj);			
+	// console.log(req.body)
+	Wiki.update({header:oldHeader}, {$set: {header:newHeader, content: newContent}}, function(err, record){
+			Wiki.findOne({header:newHeader}, function(err, updatedObj){
+				res.json(updatedObj)
+			})
 	})
+	// Wiki.update({_id: id}, {new:true}, function(err, updatedObj){
+	// 	console.log(updatedObj);
+	// 	res.json(updatedObj);			
+	// })
 	
 };
 

@@ -25,6 +25,21 @@ function mainController($scope, $http) {
       });
   };
 
+  $scope.selectWiki = function(header){
+    console.log('in selectWiki')
+    $http.get('api/'+header)
+      .success(function(data){
+        $scope.mainWiki = data;
+        $scope.header = $scope.mainWiki.header;
+        $scope.content = $scope.mainWiki.content;
+        $scope.editorEnabled = false;
+        console.log(data)
+      })
+      .error(function(data){
+        console.log('Error:' + data);
+      });
+  };
+
   $scope.newWiki = function(){ 
     console.log("are you in here (in new wiki)??")
     $scope.show = false; 
@@ -39,20 +54,49 @@ function mainController($scope, $http) {
       })
 
   }
+      
+    $scope.enableEditor = function() {
+        $scope.editorEnabled = true;
+        $scope.editableHeader = $scope.mainWiki.header;
+        $scope.editableContent = $scope.mainWiki.content;
+    };
+      
+    $scope.disableEditor = function() {
+        $scope.editorEnabled = false;
+    };
+      
+    $scope.save = function(header) {
+        $scope.mainWiki.content = $scope.editableContent;
+        $scope.mainWiki.header = $scope.editableHeader;
+        $scope.disableEditor();
+        console.log($scope.mainWiki.content, 'new content')
+        console.log($scope.mainWiki.header, 'new header')
+
+        $http.post('/api/' + header, {header: $scope.mainWiki.header, content:$scope.mainWiki.content})
+          .success(function(data){
+            console.log(data)
+            console.log('saved correctly')
+
+          })
+          .error(function(data){
+          console.log('Error:' + data);
+        });
+    };
+
 }
 
 // function filterController($scope, $http){
-//     $scope.wiki = $http.get('api/')
+//     $scope.mainWiki = $http.get('api/' + header)
 //     .success(function(data){
-//       $scope.wiki = data;
-//       return $scope.wiki
+//       $scope.mainWiki = data;
+//       return $scope.mainWiki
 //     })
 //     .error(function(data){
 //       console.log('Error:' + data);
 //     });
 
-//     $scope.header = $scope.wiki.header;
-//     $scope.content = $scope.wiki.content;
+//     $scope.header = $scope.mainWiki.header;
+//     $scope.content = $scope.mainWiki.content;
 //     $scope.editorEnabled = false;
       
 //     $scope.enableEditor = function() {
