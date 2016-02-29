@@ -28,7 +28,8 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/api/', function(req, res){
-        res.sendfile('./public/views/index.html');
+        res.sendFile(path.join(__dirname, './public/views', 'index.html'));
+        
     })
 app.get('/api/', wiki.home);
 app.get('/api/:title', wiki.loadPageGET);
