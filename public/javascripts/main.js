@@ -125,3 +125,8 @@ function mainController($scope, $http) {
 
 // }
 //http://jsfiddle.net/timriley/GVCP2/
+
+    $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    });
