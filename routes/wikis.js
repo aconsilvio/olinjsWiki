@@ -4,13 +4,15 @@ var express = require('express');
 var router = express.Router(); 
 var mongoose = require('mongoose'); 
 
-var wikiModel = require('../models/wikiModel');
-
-var Wiki = mongoose.model('wiki', wikiModel.pageSchema);
+var path = require('path');
+var Wiki = require(path.join(__dirname,'../models/wikiModel'));
 
 wiki = {}; 
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 6ded7212f5d32426d502be4e1f361b0ccb8df5fa
 wiki.home = function(req, res){ 
 	//load homepage with list of titles in database
 	
@@ -19,6 +21,7 @@ wiki.home = function(req, res){
 			res.send(err);
 		}
 		res.json(wikiList);
+		console.log(wikiList); 
 	})
 	
 }
