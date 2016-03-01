@@ -23,6 +23,7 @@ wiki.home = function(req, res){
 wiki.loadPageGET = function(req, res){
 	//Input: req, res objects 
 	//Output: sends error if error finding wiki object. Else sends json object of selected wiki
+	//selected wiki is determined by a parameter in the route
 
 	var header = req.params.title;
 	
@@ -41,12 +42,20 @@ wiki.loadPageGET = function(req, res){
 wiki.updateWikiPOST = function(req, res){
 	//Input: req, res objects
 	//Output: sends json objects of all wiki objects to display in side bar and updated wiki object to show updated wiki page
+
+	//original header from the original route called
 	var oldHeader = req.params.title;
+
+	//new header and content retrieved from form
 	var newHeader = req.body.header;
 	var newContent = req.body.content;
+
+	//update database entry with new content
 	Wiki.update({header:oldHeader}, {$set: {header:newHeader, content: newContent}}, function(err, record){
 			Wiki.findOne({header:newHeader}, function(err, updatedObj){
 				Wiki.find({}, function(err, listAll){
+
+					//send new content and list of all objects back to front-end
 					res.json({mainWiki:updatedObj, all:listAll})
 				})
 			})
@@ -54,24 +63,19 @@ wiki.updateWikiPOST = function(req, res){
 };
 
 wiki.saveNewWikiPOST  = function(req, res){
-	
-	//save a new page to the database
-	//should redirect to new post page
-	console.log('save wiki');
-	console.log(req.body.header); 
-	console.log(req.body.content); 
+	//Input: req, res objects
+	//Output: sends json objects of all wiki objects to display in side bar and new wiki object
+
 	var w = new Wiki({header: req.body.header, content: req.body.content}); 
+
+	//update database with new wiki
 	w.save(function(err){ 
 		if(err){ 
-			console.log("there has been an error saving new wiki", err); 
+			res.send("There has been an error saving the wiki")
 		}
-		console.log(w, 'w');
-		console.log("Saved new page sucessfully.")
-		//DO WE WANT TO REDIRECT? 
-		// res.redirect(200, '/api/' + w.header); 
 
+		//send all wikis along with new wiki back to front end
 		Wiki.find({}, function(err, allWikis){
-			//DO WE WANT TO SEND JSON BACK? 
 			res.json({all:allWikis, newWiki: w}); 
 		})
 	});
@@ -80,8 +84,9 @@ wiki.saveNewWikiPOST  = function(req, res){
 }
 
 wiki.catchAnything = function(req, res){ 
-
-	console.log("Caught something")
+	//Input: req, res objects
+	//Output: error message
+	res.send("There was an error.")
 }
 
 

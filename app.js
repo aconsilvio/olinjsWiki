@@ -1,3 +1,4 @@
+// dependencies
 
 var mongoose = require('mongoose'); 
 var express = require('express');
@@ -17,15 +18,22 @@ console.log(mongoURI)
 mongoose.connect(mongoURI);
 
 // configuration
+
 app.use(cookieParser());
-app.use(express.static(__dirname + '/public'));                 // set the static files location /public/img will be /img for users
-app.use(morgan('dev'));                                         // log every request to the console
-app.use(bodyParser.urlencoded({'extended':'true'}));            // parse application/x-www-form-urlencoded
-app.use(bodyParser.json());                                     // parse application/json
-app.use(bodyParser.json({ type: 'application/vnd.api+json' })); // parse application/vnd.api+json as json
+// set the static files location /public/img will be /img for users
+app.use(express.static(__dirname + '/public'));
+// log every request to the console
+app.use(morgan('dev'));
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({'extended':'true'}));
+// parse application/json
+app.use(bodyParser.json());           
+// parse application/vnd.api+json as json
+app.use(bodyParser.json({ type: 'application/vnd.api+json' }));
 app.use(methodOverride());
 
 //routes 
+
 app.get('/', function(req, res){
     res.sendfile('public/views/index.html');
 });
@@ -34,6 +42,9 @@ app.get('/api/header/:title', wiki.loadPageGET);
 app.post('/api/header/:title', wiki.updateWikiPOST);
 app.post('/api/createNew', wiki.saveNewWikiPOST);
 app.get('*', wiki.catchAnything);
+
+
+//port set up
 
 var PORT = process.env.PORT || 3000;
     app.listen(PORT, function() {
