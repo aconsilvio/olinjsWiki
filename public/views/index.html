@@ -32,7 +32,7 @@
                     <!--SIDE BAR-->
                <div id = "sidebar-wrapper">
 <!--                 <div id="wiki-list" class="row">
- -->                        <ul class = "sidebar-nav>" ng-repeat="item in wiki">
+ -->                        <ul class = "sidebar-nav>" ng-repeat="item in wiki | filter:query" >
                             <li class = "siderbar-brand" ng-click = "selectWiki(item.header)">
                                 <a href = "#">{{item.header}}</a></li>
                         </ul>
@@ -45,6 +45,14 @@
                 <!-- MAIN PAGE STUFF -->
                                 <h1> The Chocolate Wiki</h1>
                                 <button id = "addNew" ng-click = "enableShowNewWiki()"> New Wiki </button>
+                                <div class ="search-box">
+                                   <!-- <input ng-model="search.$"> -->
+                                   <input type ="text" ng-model="query">
+                                   <div class ="search-box-btn">
+                                       <span>
+                                           <button type = "button" ng-click = "search()">search</button></span>
+                                   </div>
+                           </div>
                                 <div id = "wiki-content" ng-show = "!showNewWiki">  <!-- ng-show = "!showNewWiki" -->
                                     <div ng-hide="editorEnabled">
                                         <h2>{{mainWiki.header}}</h2>

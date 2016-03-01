@@ -102,4 +102,30 @@ function mainController($scope, $http) {
         });
     };
 
+    $scope.partialSearch = function(header){
+
+    $scope.showNewWiki = false; 
+    // $scope.showContent = true; 
+    $scope.newWiki = {};
+
+    console.log('in selectWiki')
+    $http.get('api/header/'+header)
+      .success(function(data){
+        $scope.mainWiki = data;
+        $scope.header = $scope.mainWiki.header;
+        $scope.content = $scope.mainWiki.content;
+        $scope.editorEnabled = false;
+        console.log(data)
+      })
+      .error(function(data){
+        console.log('Error:' + data);
+      });
+  };
+
+    $scope.search = function(){
+      console.log('im in search');
+      $scope.searchQuery = angular.copy($scope.query)
+      $scope.selectWiki($scope.searchQuery);
+    }
+
 }
