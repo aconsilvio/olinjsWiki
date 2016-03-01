@@ -44,12 +44,12 @@
                             <div class="col-lg-12">
                 <!-- MAIN PAGE STUFF -->
                                 <h1> The Chocolate Wiki</h1>
-                                <button id = "addNew" ng-click = "showNewWiki = true; showContent = false"> New Wiki </button>
-                                <div id = "wiki-content" ng-show = "showContent">
+                                <button id = "addNew" ng-click = "enableShowNewWiki()"> New Wiki </button>
+                                <div id = "wiki-content" ng-show = "!showNewWiki">  <!-- ng-show = "!showNewWiki" -->
                                     <div ng-hide="editorEnabled">
                                         <h2>{{mainWiki.header}}</h2>
                                         <p>{{mainWiki.content}}</p>
-                                        <button a href="#" ng-click="enableEditor()">Edit</button>
+                                        <button a href="#" ng-click="enableEditor()" ng-show = "showNewWiki">Edit</button> <!-- ng-show = "showNewWiki" -->
                                     </div>
                                     <div ng-show="editorEnabled">
                                         <input ng-model="editableHeader" ng-show="editorEnabled">
@@ -61,11 +61,11 @@
                                 </div>
                        
                         <!-- New form stuff -->
-                            <div id = "new wiki" ng-show = "showNewWiki"> 
+                            <div id = "new wiki" ng-show = "showNewWiki"> <!-- ng-show = "showNewWiki" -->
                                 <form class ="newWikiContent"> 
                                     Title: <input type="text" ng-model="newWiki.header" /><br />
                                     Content: <input type="text" ng-model="newWiki.content" /><br />
-                                    <button ng-click="newWiki()"> Save </button>
+                                    <button ng-click="saveNewWiki()"> Save </button>
                                 </form>
                             </div>
                         </div>

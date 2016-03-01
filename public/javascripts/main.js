@@ -2,7 +2,7 @@ var wikiApp = angular.module('wikiApp', []);
 
 function mainController($scope, $http) {
   $scope.showNewWiki = false; 
-  $scope.showContent = false; 
+  // $scope.showContent = false; 
 
   $http.get('api/home')
     .success(function(data){
@@ -13,6 +13,7 @@ function mainController($scope, $http) {
     .error(function(data){
       console.log('Error:' + data);
     });
+
 
   $scope.home = function(){
     $http.post('api/home')
@@ -28,8 +29,9 @@ function mainController($scope, $http) {
   $scope.selectWiki = function(header){
 
     $scope.showNewWiki = false; 
-    $scope.showContent = true; 
-    $scope.newWiki = {}; 
+    // $scope.showContent = true; 
+    $scope.newWiki = {};
+
     console.log('in selectWiki')
     $http.get('api/header/'+header)
       .success(function(data){
@@ -44,17 +46,18 @@ function mainController($scope, $http) {
       });
   };
 
-  $scope.newWiki = function(){ 
+  $scope.saveNewWiki = function(){ 
     console.log("are you in here (in new wiki)??")
     $scope.showNewWiki = false;
-    $scope.showContent = false;  
+    // $scope.showContent = false;  
 
     console.log("about to post")
     $http.post('/api/createNew', {header: $scope.newWiki.header, content: $scope.newWiki.content})
       .success(function(data){ 
         $scope.newWiki = data.newWiki;
         $scope.wiki = data.all;
-        console.log("Success", data)
+        console.log("Success", data.newWiki);
+        console.log("data all ", data.all);
       })
       .error(function(data){ 
         console.log("Failure", data)
@@ -62,6 +65,12 @@ function mainController($scope, $http) {
 
   }
       
+  $scope.enableShowNewWiki = function(){ 
+    console.log($scope.showNewWiki); 
+    $scope.showNewWiki = true; 
+    console.log($scope.showNewWiki);
+  }
+
     $scope.enableEditor = function() {
         $scope.editorEnabled = true;
         $scope.editableHeader = $scope.mainWiki.header;
@@ -74,7 +83,7 @@ function mainController($scope, $http) {
       
     $scope.save = function(header) {
         $scope.showNewWiki = false; 
-        $scope.showContent = true; 
+        // $scope.showContent = true; 
         $scope.mainWiki.content = $scope.editableContent;
         $scope.mainWiki.header = $scope.editableHeader;
         $scope.disableEditor();
