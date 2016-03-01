@@ -1,9 +1,11 @@
-<!-- index.html -->
+
 <!doctype html>
 
 <!-- ASSIGN OUR ANGULAR MODULE -->
 <html ng-app="wikiApp">
 <head>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/custom.css">
     <!-- META -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -11,41 +13,59 @@
 
     <title>Wiki</title>
 
-    <!-- SCROLLS -->
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"><!-- load bootstrap -->
-    <link href="/stylesheets/simple-sidebar.css" rel="stylesheet">
-
-    <!-- SPELLS -->
-    
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script><!-- load jquery -->
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js">
 </script><!-- load angular -->
-<script type="text/javascript" src="/javascripts/main.js"></script>
+    <script type="text/javascript" src="/javascripts/main.js"></script>
     
 
 </head>
 
 <!-- SET THE CONTROLLER AND GET ALL toDoS -->
 <body ng-controller="mainController">
-    <div id ="wrapper">
-        <div class="container">
-                    <!--SIDE BAR-->
-               <div id = "sidebar-wrapper">
-<!--                 <div id="wiki-list" class="row">
- -->                        <ul class = "sidebar-nav>" ng-repeat="item in wiki">
-                            <li class = "siderbar-brand" ng-click = "selectWiki(item.header)">
-                                <a href = "#">{{item.header}}</a></li>
-                        </ul>
-<!--                     </div>
- -->                </div>
-                <div id="page-content-wrapper">
-                    <div class="container-fluid">
-                        <div class="row">
-                            <div class="col-lg-12">
-                <!-- MAIN PAGE STUFF -->
-                                <h1> The Chocolate Wiki</h1>
-                                <button id = "addNew" ng-click = "showNewWiki = true; showContent = false"> New Wiki </button>
-                                <div id = "wiki-content" ng-show = "showContent">
+<header class="navbar navbar-bright navbar-fixed-top" role="banner">
+  <div class="container">
+    <div class="navbar-header">
+      <a href="/" class="navbar-brand">The Chocolate Wiki</a>
+    </div>
+    <nav class="collapse navbar-collapse" role="navigation">
+      <ul class="nav navbar-nav">
+        <li>
+          <a href="#" ng-click = "showNewWiki = true; showContent = false">New Wiki</a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<div id="masthead">  
+  <div class="container">
+      <div class="row">
+        <div class="col-md-7">
+          <h1>The Chocolate Wiki
+            <p class="lead">Annabel, Casey, Zarin</p>
+          </h1>
+        </div>
+      </div> 
+  </div><!-- /cont -->
+</div>
+
+
+<div class="container">
+    <div class="row">
+            <div class="col-md-3" id="leftCol">
+              
+                <ul class="nav nav-stacked" id="sidebar" ng-repeat="item in wiki">
+                  <li ng-click = "selectWiki(item.header)"> 
+                    <a href = "#">{{item.header}}</a>
+                  </li>
+                </ul>
+              
+            </div>  
+            <div class="col-md-9" id="mainCol">
+              
+                <br>
+              <div id = "wiki-content" ng-show = "showContent">
                                     <div ng-hide="editorEnabled">
                                         <h2>{{mainWiki.header}}</h2>
                                         <p>{{mainWiki.content}}</p>
@@ -59,9 +79,61 @@
                                         <button href="#" ng-click="disableEditor()">Cancel</button>.
                                     </div>
                                 </div>
-                       
+
+                                            <div id = "new wiki" ng-show = "showNewWiki"> 
+                                <form class ="newWikiContent"> 
+                                    Title: <input type="text" ng-model="newWiki.header" /><br />
+                                    Content: <input type="text" ng-model="newWiki.content" /><br />
+                                    <button ng-click="newWiki()"> Save </button>
+                                </form>
+                            </div>
+
+
+            </div>
+    </div>
+</div>
+</body>
+</html>
+
+
+
+  <!--   <div id ="wrapper">
+        <div class="container"> -->
+                    <!--SIDE BAR-->
+
+<!--                 <div id="wiki-list" class="row">
+ -->                    <!-- <nav class="collapse navbar-collapse" role="navigation">    
+                        <ul class="nav navbar-nav" ng-repeat="item in wiki">
+                            <li ng-click = "selectWiki(item.header)">
+                                <a href = "#">{{item.header}}</a></li>
+                        </ul>
+                        </nav> -->
+<!--                     </div>
+ -->             <!--    </div>
+                <div id="page-content-wrapper">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-lg-12"> -->
+                <!-- MAIN PAGE STUFF -->
+                                <!-- <h1> The Chocolate Wiki</h1>
+                                <button id = "addNew" ng-click = "showNewWiki = true; showContent = false"> New Wiki </button> -->
+                                <!-- <div id = "wiki-content" ng-show = "showContent">
+                                    <div ng-hide="editorEnabled">
+                                        <h2>{{mainWiki.header}}</h2>
+                                        <p>{{mainWiki.content}}</p>
+                                        <button a href="#" ng-click="enableEditor()">Edit</button>
+                                    </div>
+                                    <div ng-show="editorEnabled">
+                                        <input ng-model="editableHeader" ng-show="editorEnabled">
+                                        <input ng-model="editableContent" ng-show="editorEnabled">
+                                        <button href="#" ng-click="save(mainWiki.header)">Save</button>
+                                          or
+                                        <button href="#" ng-click="disableEditor()">Cancel</button>.
+                                    </div>
+                                </div>
+                        -->
                         <!-- New form stuff -->
-                            <div id = "new wiki" ng-show = "showNewWiki"> 
+                           <!--  <div id = "new wiki" ng-show = "showNewWiki"> 
                                 <form class ="newWikiContent"> 
                                     Title: <input type="text" ng-model="newWiki.header" /><br />
                                     Content: <input type="text" ng-model="newWiki.content" /><br />

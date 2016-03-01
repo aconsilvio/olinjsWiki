@@ -3,6 +3,7 @@ var wikiApp = angular.module('wikiApp', []);
 function mainController($scope, $http) {
   $scope.showNewWiki = false; 
   $scope.showContent = false; 
+  $scope.newWiki = {}; 
 
   $http.get('api/home')
     .success(function(data){
@@ -53,7 +54,10 @@ function mainController($scope, $http) {
     $http.post('/api/createNew', {header: $scope.newWiki.header, content: $scope.newWiki.content})
       .success(function(data){ 
         $scope.newWiki = data.newWiki;
+        $window.location.href = '/api/header/'+$scope.newWiki.header;
         $scope.wiki = data.all;
+        $scope.newWiki = {};
+
         console.log("Success", data)
       })
       .error(function(data){ 
@@ -94,3 +98,17 @@ function mainController($scope, $http) {
     };
 
 }
+
+// $('#sidebar').affix({
+//       offset: {
+//         top: 245
+//       }
+// });
+
+// var $body   = $(document.body);
+// var navHeight = $('.navbar').outerHeight(true) + 10;
+
+// $body.scrollspy({
+//   target: '#leftCol',
+//   offset: navHeight
+// });
