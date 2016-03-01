@@ -1,7 +1,8 @@
 var wikiApp = angular.module('wikiApp', []);
 
 function mainController($scope, $http) {
-  $scope.show = false; 
+  $scope.showNewWiki = false; 
+  $scope.showContent = false; 
 
   $http.get('api/home')
     .success(function(data){
@@ -25,6 +26,10 @@ function mainController($scope, $http) {
   };
 
   $scope.selectWiki = function(header){
+
+    $scope.showNewWiki = false; 
+    $scope.showContent = true; 
+    $scope.newWiki = {}; 
     console.log('in selectWiki')
     $http.get('api/header/'+header)
       .success(function(data){
@@ -41,7 +46,9 @@ function mainController($scope, $http) {
 
   $scope.newWiki = function(){ 
     console.log("are you in here (in new wiki)??")
-    $scope.show = false; 
+    $scope.showNewWiki = false;
+    $scope.showContent = false;  
+
     console.log("about to post")
     $http.post('/api/createNew', {header: $scope.newWiki.header, content: $scope.newWiki.content})
       .success(function(data){ 
@@ -66,6 +73,8 @@ function mainController($scope, $http) {
     };
       
     $scope.save = function(header) {
+        $scope.showNewWiki = false; 
+        $scope.showContent = true; 
         $scope.mainWiki.content = $scope.editableContent;
         $scope.mainWiki.header = $scope.editableHeader;
         $scope.disableEditor();
