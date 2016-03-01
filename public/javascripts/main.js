@@ -30,3 +30,11 @@ function mainController($scope, $http) {
 }
 
 //http://jsfiddle.net/timriley/GVCP2/
+  $scope.search = function(){
+    console.log('im in search');
+    $scope.searchQuery = angular.copy($scope.query)
+    $scope.selectWiki($scope.searchQuery);
+  }
+
+}
+
