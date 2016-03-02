@@ -35,7 +35,6 @@ wiki.loadPageGET = function(req, res){
 		//json object to load page of a specific title
 		res.json(wikiContent);
 	})
-
 };
 
 wiki.updateWikiPOST = function(req, res){
