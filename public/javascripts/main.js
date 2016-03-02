@@ -2,6 +2,7 @@ var wikiApp = angular.module('wikiApp', []);
 
 function mainController($scope, $http) {
   $scope.showNewWiki = false; 
+  $scope.showEdit = false;
 
   //load front page with database information
   $http.get('api/home')
@@ -18,6 +19,7 @@ function mainController($scope, $http) {
 
     //hides the new wiki form & resets the current entry into newWiki
     $scope.showNewWiki = false; 
+    $scope.showEdit = true;
     $scope.newWiki = {};
 
     //get request to database to get object specified by header
