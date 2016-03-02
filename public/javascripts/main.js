@@ -2,6 +2,7 @@ var wikiApp = angular.module('wikiApp', []);
 
 function mainController($scope, $http) {
   $scope.showNewWiki = false; 
+  $scope.showEdit = false;
   // $scope.showContent = false; 
 
   $http.get('api/home')
@@ -29,6 +30,7 @@ function mainController($scope, $http) {
   $scope.selectWiki = function(header){
 
     $scope.showNewWiki = false; 
+    $scope.showEdit = true;
     // $scope.showContent = true; 
     $scope.newWiki = {};
 
