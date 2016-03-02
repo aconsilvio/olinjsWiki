@@ -25,18 +25,21 @@
 </head>
 
 <!-- SET THE CONTROLLER AND GET ALL toDoS -->
-<body ng-controller="mainController">
+<body data-spy="scroll" data-target= "sidebar-nav>" ng-controller="mainController">
     <div id ="wrapper">
         <div class="container">
                     <!--SIDE BAR-->
                <div id = "sidebar-wrapper">
+
 <!--                 <div id="wiki-list" class="row">
- -->                        <ul class = "sidebar-nav>" ng-repeat="item in wiki | filter:query" >
-                            <li class = "siderbar-brand" ng-click = "selectWiki(item.header)">
-                                <a href = "#">{{item.header}}</a></li>
+ -->                        <!-- <ul class = "sidebar-nav>" ng-repeat="item in wiki | filter:query" >  -->
+                        <ul>  <data-spy="scroll" class = "sidebar-nav>" ng-repeat="item in wiki | filter:query" > 
+                            <li class = "sidebar-brand" ng-click = "selectWiki(item.header)">
+                                <a href = "#">{{item.header}} </a></li>
                         </ul>
 <!--                     </div>
  -->                </div>
+
                 <div id="page-content-wrapper">
                     <div class="container-fluid">
                         <div class="row">

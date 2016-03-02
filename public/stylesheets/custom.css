@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /*made sidebar and header*/
 
 #addNew{ 
@@ -25,4 +26,84 @@
 
 #inputBoxContent{ 
 	height: 70px; 
+=======
+/*sidebar CSS*/
+#wrapper {
+
+  padding-left: 250px;
+  transition: all 0.4s ease 0s;
+}
+
+#sidebar-wrapper {
+  padding-top: 25px;
+  margin-left: -250px;
+  left: 250px;
+  width: 250px;
+  background: linear-gradient(to top right, #000000, #53346D);
+  color: #FAEBD7;
+  position: fixed;
+  height: 100%;
+  overflow-y: auto;
+  z-index: 1000;
+  transition: all 0.4s ease 0s;
+}
+
+#sidebar-wrapper a{
+	color:#FAEBD7;
+	position: fixed;
+	font-weight: normal;
+	font-size: 110%;
+	height: 100%;
+	
+}
+
+#page-content-wrapper {
+  width: 100%;
+}
+.sidebar-nav li a {
+    display: block;
+    text-decoration: none;
+    color: #999999;
+
+}
+.sidebar-nav {
+  position: absolute;
+  top: 0;
+  width: 250px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  
+
+
+}
+
+.sidebar-nav li a:hover {
+    text-decoration: none;
+    color: #F0FFFF;
+    background: rgba(255,255,255,0.2);
+}
+
+@media (max-width:767px) {
+
+    #wrapper {
+      padding-left: 0;
+    }
+
+    #sidebar-wrapper {
+      left: 0;
+    }
+
+    #wrapper.active {
+      position: relative;
+      left: 250px;
+    }
+
+    #wrapper.active #sidebar-wrapper {
+      left: 250px;
+      width: 250px;
+      transition: all 0.4s ease 0s;
+    }
+
+>>>>>>> 70d5ffa295ccdbba7ef73682114393768b60c139
 }
