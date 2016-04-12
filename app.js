@@ -41,7 +41,7 @@ app.get('/api/home', wiki.home);
 app.get('/api/header/:title', wiki.loadPageGET);
 app.post('/api/header/:title', wiki.updateWikiPOST);
 app.post('/api/createNew', wiki.saveNewWikiPOST);
-app.get('*', wiki.catchAnything);
+app.get('*', wiki.catchAnything); //common practice is to actually send your angular app here and use angular to catch 404s
 
 
 //port set up

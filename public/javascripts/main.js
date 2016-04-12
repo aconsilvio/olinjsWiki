@@ -13,7 +13,7 @@ function mainController($scope, $http) {
       console.log('Error:' + data);
     });
 
-
+  //Really should use ng-route for this to make each wiki page a separate page.
   $scope.selectWiki = function(header){
   //loads content and header for a specific database entry based on link
 
