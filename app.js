@@ -35,6 +35,7 @@ app.use(methodOverride());
 //routes 
 
 app.get('/', function(req, res){
+    //sendfile is deprecated, use sendFile
     res.sendfile('public/views/index.html');
 });
 app.get('/api/home', wiki.home);
